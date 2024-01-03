@@ -1,31 +1,48 @@
 "use client";
 
 import CreateBtn from "@/components/CreateBtn";
-import GlobalSelect from "@/components/GlobalSelect";
-import GrayBtn from "@/components/GrayBtn";
-import GreenBtn from "@/components/GreenBtn";
 import GreenTemplateViewDownloadBar from "@/components/GreenTemplateViewDownloadBar";
 import GridContainer from "@/components/Grid";
 import Modal from "@/components/Modal";
 import Scoreboard from "@/components/Scoreboard";
 import TemplateViewDownloadBar from "@/components/TemplateViewDownloadBar";
-import TimeSelect from "@/components/TimeSelect";
 import Title from "@/components/Title";
-import { FormControl } from "@mui/base";
 import { FormControlLabel, Radio, RadioGroup, Stack } from "@mui/material";
 import { useState } from "react";
 
 export default function ResultadoPage() {
   const [isCreateClicked, setIsCreateClicked] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [imageUrl, setImageUrl] = useState('/api/og');
+  const [inputDate, setInputDate] = useState('02/01')
+  const [inputResultHome, setInputResultHome] = useState(0)
+  const [inputResultOut, setInputResultOut] = useState(0)
+  const [selectedRadio, setSelectedRadio] = useState("");
 
   const handleCreateClick = () => {
     setIsCreateClicked(true);
+    setImageUrl(
+      `/api/og?title=${selectedRadio}&date=${inputDate}&result=${inputResultHome}-${inputResultOut}`
+    )
   };
+
+  const handleInputResultHome = (event: any) => {
+    setInputResultHome(event.target.value)
+    
+  }
+
+  const handleInputResultOut = (event: any) => {
+    setInputResultOut(event.target.value)
+    
+  }
 
   const handleModal = () => {
     setIsModalOpen(!isModalOpen);
-    console.log(isModalOpen);
+
+  };
+
+  const handleRadioChange = (event: any) => {
+    setSelectedRadio(event.target.value);
   };
 
   return (
@@ -51,11 +68,14 @@ export default function ResultadoPage() {
         <Scoreboard
           firstSrc="/palmas-logo.svg"
           secondSrc="/spfc-logo.svg"
-          firstTeamGoal={0}
-          secondTeamGoal={0}
+          valueTeamHome={inputResultHome}
+          valueTeamOut={inputResultOut}
+          onChangeScoreHome={handleInputResultHome}
+          onChangeScoreOut={handleInputResultOut}
         />
         <Stack direction="row" width="100%">
-          <RadioGroup row sx={{ width: "100%", justifyContent: "space-between"}}>
+          <RadioGroup value={selectedRadio}
+  onChange={handleRadioChange} row sx={{ width: "100%", justifyContent: "space-between"}}>
             <FormControlLabel
               label="1º tempo"
               value="1º tempo"
@@ -108,7 +128,7 @@ export default function ResultadoPage() {
             {isCreateClicked && <GreenTemplateViewDownloadBar onClick={handleModal} />}
           </GridContainer>
 
-          <Modal open={isModalOpen} onClose={handleModal} />
+          <Modal src={imageUrl} open={isModalOpen} onClose={handleModal} />
         </div>
       </div>
     </div>

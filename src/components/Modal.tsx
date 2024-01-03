@@ -7,9 +7,10 @@ import Image from "next/image";
 export interface ModalProps {
   onClose: (event: React.MouseEvent<HTMLElement>) => void;
   open: boolean;
+  src: string
 }
 
-export default function Modal({ onClose, open }: ModalProps) {
+export default function Modal({ onClose, open, src }: ModalProps) {
   return (
     <Dialog open={open} onClose={onClose}  PaperProps={{
       style: {
@@ -21,13 +22,14 @@ export default function Modal({ onClose, open }: ModalProps) {
         <IconButton onClick={onClose} sx={{ alignSelf: "flex-end" }}>
           <CloseIcon />
         </IconButton>
-        <Image
-          width={350}
-          height={600}
-          alt="template image"
-          src="/template.svg"
-          style={{ alignSelf: "center" }}
-        />
+        <img
+              src={src}
+              alt="OG IMAGE"
+              style={{
+                width: '360px',
+                height: '640px'
+              }}
+            />
       </Stack>
     </Dialog>
   );
