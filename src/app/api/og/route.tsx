@@ -4,9 +4,10 @@ export const runtime = 'edge'
 
 export async function GET(request: any) {
   const { searchParams } = new URL(request.url)
-  const title = searchParams.get('title')
-  const date = searchParams.get('date')
-  const result = searchParams.get('result')
+  const title = searchParams.get('title') ?? "";
+  const date = searchParams.get('date') ?? ""; 
+  const result = searchParams.get('result') ?? "";
+  const backgroundPath = searchParams.get('backgroundPath') ?? "";
 
   const fontHeartResponse = await fetch(
     new URL('../../../../public/HEART__.ttf', import.meta.url)
@@ -16,9 +17,10 @@ export async function GET(request: any) {
   const fontMontResponse = await fetch(
     new URL('../../../../public/MONT-BLACK__.ttf', import.meta.url)
   )
+
   const fontMontData = await fontMontResponse.arrayBuffer()
 
-  const imageData = await fetch(new URL('../../../../public/template.svg', import.meta.url)).then(
+  const imageData = await fetch(backgroundPath).then(
     (res) => res.arrayBuffer(),
   );
 
@@ -31,7 +33,7 @@ export async function GET(request: any) {
     (
       <div style={{ display: 'flex' }}>
         <img src={`data:image/svg+xml;base64,${base64ImageData}`} />
-        <div
+        {title && (<div
           style={{
             position: 'absolute',
             fontSize: 362,
@@ -45,7 +47,8 @@ export async function GET(request: any) {
           }}
         >
           {title}
-        </div>
+        </div>)}
+        {date && (
         <div
           style={{
             position: 'absolute',
@@ -64,8 +67,8 @@ export async function GET(request: any) {
           }}
         >
           {date}
-        </div>
-        <div
+        </div>)}
+        {result && (<div
           style={{
             position: 'absolute',
             fontSize: 305,
@@ -80,7 +83,7 @@ export async function GET(request: any) {
           }}
         >
           {result}
-        </div>
+        </div>)}
       </div>
     ),
     {

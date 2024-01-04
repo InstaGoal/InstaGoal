@@ -14,16 +14,18 @@ export default function ResultadoPage() {
   const [isCreateClicked, setIsCreateClicked] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState('/api/og');
-  const [inputDate, setInputDate] = useState('02/01')
-  const [inputResultHome, setInputResultHome] = useState(0)
-  const [inputResultOut, setInputResultOut] = useState(0)
+  const [inputDate, setInputDate] = useState('02/01');
+  const [inputResultHome, setInputResultHome] = useState(0);
+  const [inputResultOut, setInputResultOut] = useState(0);
   const [selectedRadio, setSelectedRadio] = useState("");
+  const baseURL = window.location.origin
+  const backgroundPath = `${baseURL}/palmas-logo.svg`;
 
   const handleCreateClick = () => {
     setIsCreateClicked(true);
     setImageUrl(
-      `/api/og?title=${selectedRadio}&date=${inputDate}&result=${inputResultHome}-${inputResultOut}`
-    )
+      `/api/og?title=${selectedRadio}&date=${inputDate}&result=${inputResultHome}-${inputResultOut}&backgroundPath=${backgroundPath}`
+    );
   };
 
   const handleInputResultHome = (event: any) => {
