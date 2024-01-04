@@ -16,8 +16,8 @@ export default function MatchDetails() {
       logo: "/logo-capital.svg",
     },
     {
-      name: "Atlético-MG",
-      logo: "/logo-cam.svg",
+      name: "Cruzeiro-MG",
+      logo: "/cruzeiro-logo.svg",
     },
   ];
 
@@ -65,7 +65,7 @@ export default function MatchDetails() {
           width="40%"
         >
           <Typography>Ao vivo</Typography>
-          <Typography>20:00</Typography>
+          <Typography>15:15</Typography>
         </Stack>
       </Stack>
     </Container>
