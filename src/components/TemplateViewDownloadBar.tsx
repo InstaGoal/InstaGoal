@@ -4,6 +4,7 @@ import GridContainer from "./Grid";
 
 export interface TemplateProps{
     onClick: (event: React.MouseEvent<HTMLElement>) => void;
+    downloadOnClick?: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 export default function TemplateViewDownloadBar({onClick}: TemplateProps) {

@@ -4,7 +4,7 @@ import GridContainer from "./Grid";
 import { TemplateProps } from "./TemplateViewDownloadBar";
 
 export default function GreenTemplateViewDownloadBar({
-  onClick,
+  onClick, downloadOnClick
 }: TemplateProps) {
   return (
     <>
@@ -12,7 +12,7 @@ export default function GreenTemplateViewDownloadBar({
         <GreenBtn onClick={onClick} text="Visualizar" />
       </GridContainer>
       <GridContainer item={true} xs={3}>
-        <GreenBtn src="download-icon.svg" />
+        <GreenBtn onClick={downloadOnClick} src="download-icon.svg" />
       </GridContainer>
     </>
   );

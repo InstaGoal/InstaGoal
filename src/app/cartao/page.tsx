@@ -8,14 +8,8 @@ import Modal from "@/components/Modal";
 import TemplateViewDownloadBar from "@/components/TemplateViewDownloadBar";
 import TimeSelect from "@/components/TimeSelect";
 import Title from "@/components/Title";
-import {
-  FormControlLabel,
-  Grid,
-  Radio,
-  RadioGroup,
-  Stack,
-} from "@mui/material";
 import { useState } from "react";
+import { saveAs } from 'file-saver'
 
 export default function CardPage() {
   const [isCreateClicked, setIsCreateClicked] = useState(false);
@@ -86,6 +80,10 @@ export default function CardPage() {
     setCard(value.value)
   }
 
+  const handleDownloadImage = () => {
+    saveAs(imageUrl, 'cartao.png')
+  }
+
   return (
     <div
       style={{
@@ -149,7 +147,7 @@ export default function CardPage() {
               <TemplateViewDownloadBar onClick={handleModal} />
             )}
             {isCreateClicked && (
-              <GreenTemplateViewDownloadBar onClick={handleModal} />
+              <GreenTemplateViewDownloadBar downloadOnClick={handleDownloadImage} onClick={handleModal} />
             )}
           </GridContainer>
 

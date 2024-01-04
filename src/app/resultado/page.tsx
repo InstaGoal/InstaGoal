@@ -9,6 +9,7 @@ import TemplateViewDownloadBar from "@/components/TemplateViewDownloadBar";
 import Title from "@/components/Title";
 import { FormControlLabel, Radio, RadioGroup, Stack } from "@mui/material";
 import { useState } from "react";
+import { saveAs } from 'file-saver'
 
 export default function ResultadoPage() {
   const [isCreateClicked, setIsCreateClicked] = useState(false);
@@ -46,8 +47,8 @@ export default function ResultadoPage() {
     setSelectedRadio(event.target.value);
   };
 
-  const handleUploadImage = () => {
-
+  const handleDownloadImage = () => {
+    saveAs(imageUrl, 'resultado.png')
   }
 
   return (
@@ -130,7 +131,7 @@ export default function ResultadoPage() {
 
           <GridContainer container={true} sx={{justifyContent: "space-between"}}>
             {!isCreateClicked && <TemplateViewDownloadBar onClick={handleModal} />}
-            {isCreateClicked && <GreenTemplateViewDownloadBar onClick={handleModal} />}
+            {isCreateClicked && <GreenTemplateViewDownloadBar downloadOnClick={handleDownloadImage} onClick={handleModal} />}
           </GridContainer>
 
           <Modal src={imageUrl} open={isModalOpen} onClose={handleModal} />

@@ -12,6 +12,7 @@ import TemplateViewDownloadBar from "@/components/TemplateViewDownloadBar";
 import TimeSelect from "@/components/TimeSelect";
 import Title from "@/components/Title";
 import { useState } from "react";
+import { saveAs } from 'file-saver'
 
 export default function GoalPage() {
   const [isCreateClicked, setIsCreateClicked] = useState(false);
@@ -84,6 +85,10 @@ export default function GoalPage() {
     setInputResultOut(event.target.value);
   };
 
+  const handleDownloadImage = () => {
+    saveAs(imageUrl, 'gol.png')
+  }
+
   return (
     <>
       <div
@@ -146,7 +151,7 @@ export default function GoalPage() {
                 <TemplateViewDownloadBar onClick={handleModal} />
               )}
               {isCreateClicked && (
-                <GreenTemplateViewDownloadBar onClick={handleModal} />
+                <GreenTemplateViewDownloadBar downloadOnClick={handleDownloadImage} onClick={handleModal} />
               )}
             </GridContainer>
 

@@ -12,6 +12,7 @@ import TemplateViewDownloadBar from "@/components/TemplateViewDownloadBar";
 import TimeSelect from "@/components/TimeSelect";
 import Title from "@/components/Title";
 import { useState } from "react";
+import { saveAs } from 'file-saver'
 
 export default function SubstitutionPage() {
   const [isCreateClicked, setIsCreateClicked] = useState(false);
@@ -101,6 +102,10 @@ export default function SubstitutionPage() {
     setPlayerOut(value.label);
   };
 
+  const handleDownloadImage = () => {
+    saveAs(imageUrl, 'substituicao.png')
+  }
+
   return (
     <>
       <div
@@ -160,7 +165,7 @@ export default function SubstitutionPage() {
 
             <GridContainer container sx={{justifyContent: "space-between"}}>
               {!isCreateClicked && <TemplateViewDownloadBar onClick={handleModal} />}
-              {isCreateClicked && <GreenTemplateViewDownloadBar onClick={handleModal} />}
+              {isCreateClicked && <GreenTemplateViewDownloadBar downloadOnClick={handleDownloadImage} onClick={handleModal} />}
             </GridContainer>
             
             <Modal src={imageUrl} open={isModalOpen} onClose={handleModal}/>
