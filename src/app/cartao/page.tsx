@@ -24,7 +24,7 @@ export default function CardPage() {
   const [imageUrl, setImageUrl] = useState("/api/og");
   const [goalMinute, setGoalMinute] = useState("");
   const [card, setCard] = useState("")
-  const baseURL = window.location.origin;
+  const baseURL = typeof window !== 'undefined' ? window.location.origin : '';
   const backgroundPath = `${baseURL}/cartao.svg`;
   const encodedPlayer = encodeURIComponent(player);
   const encodedGoalMinute = encodeURIComponent(goalMinute);

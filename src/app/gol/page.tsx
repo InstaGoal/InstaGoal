@@ -21,7 +21,7 @@ export default function GoalPage() {
   const [imageUrl, setImageUrl] = useState("/api/og");
   const [inputResultHome, setInputResultHome] = useState(0);
   const [inputResultOut, setInputResultOut] = useState(0);
-  const baseURL = window.location.origin;
+  const baseURL = typeof window !== 'undefined' ? window.location.origin : '';
   const backgroundPath = `${baseURL}/gol.svg`;
   const encodedPlayer = encodeURIComponent(player);
   const encodedGoalMinute = encodeURIComponent(goalMinute);

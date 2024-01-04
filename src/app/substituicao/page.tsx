@@ -20,7 +20,7 @@ export default function SubstitutionPage() {
   const [playerEnter, setPlayerEnter] = useState("")
   const [playerOut, setPlayerOut] = useState("")
   const [imageUrl, setImageUrl] = useState("/api/og");
-  const baseURL = window.location.origin;
+  const baseURL = typeof window !== 'undefined' ? window.location.origin : '';
   const backgroundPath = `${baseURL}/subs.svg`;
   const encodedPlayerEnter = encodeURIComponent(playerEnter);
   const encodedPlayerOut = encodeURIComponent(playerOut);
