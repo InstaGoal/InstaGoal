@@ -40,7 +40,6 @@ export default function LineupPage() {
 
   const handleModal = () => {
     setIsModalOpen(!isModalOpen);
-    console.log(isModalOpen);
   };
 
   return (
@@ -92,7 +91,7 @@ export default function LineupPage() {
               )}
             </GridContainer>
 
-            <Modal open={isModalOpen} onClose={handleModal} />
+            {/* <Modal open={isModalOpen} onClose={handleModal} /> */}
           </div>
         </div>
       </div>

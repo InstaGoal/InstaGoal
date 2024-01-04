@@ -14,17 +14,16 @@ export default function ResultadoPage() {
   const [isCreateClicked, setIsCreateClicked] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState('/api/og');
-  const [inputDate, setInputDate] = useState('02/01');
   const [inputResultHome, setInputResultHome] = useState(0);
   const [inputResultOut, setInputResultOut] = useState(0);
   const [selectedRadio, setSelectedRadio] = useState("");
-  const baseURL = window.location.origin
-  const backgroundPath = `${baseURL}/palmas-logo.svg`;
+  const baseURL = typeof window !== 'undefined' ? window.location.origin : '';
+  const backgroundPath = `${baseURL}/resultado.svg`;
 
   const handleCreateClick = () => {
     setIsCreateClicked(true);
     setImageUrl(
-      `/api/og?title=${selectedRadio}&date=${inputDate}&result=${inputResultHome}-${inputResultOut}&backgroundPath=${backgroundPath}`
+      `/api/og?title=${encodeURIComponent(selectedRadio)}&result=${encodeURIComponent(inputResultHome)}%20${encodeURIComponent(inputResultOut)}&backgroundPath=${backgroundPath}`
     );
   };
 
@@ -46,6 +45,10 @@ export default function ResultadoPage() {
   const handleRadioChange = (event: any) => {
     setSelectedRadio(event.target.value);
   };
+
+  const handleUploadImage = () => {
+
+  }
 
   return (
     <div
@@ -69,7 +72,7 @@ export default function ResultadoPage() {
       >
         <Scoreboard
           firstSrc="/palmas-logo.svg"
-          secondSrc="/spfc-logo.svg"
+          secondSrc="/cruzeiro-logo.svg"
           valueTeamHome={inputResultHome}
           valueTeamOut={inputResultOut}
           onChangeScoreHome={handleInputResultHome}
@@ -80,7 +83,7 @@ export default function ResultadoPage() {
   onChange={handleRadioChange} row sx={{ width: "100%", justifyContent: "space-between"}}>
             <FormControlLabel
               label="1º tempo"
-              value="1º tempo"
+              value="FIM DO 1º TEMPO"
               sx={{ ".MuiFormControlLabel-label": {color: "secondary.main"}}}
               control={
                 <Radio
@@ -95,7 +98,7 @@ export default function ResultadoPage() {
             />
             <FormControlLabel
               label="Resultado"
-              value="Resultado"
+              value="FIM DE JOGO"
               sx={{ ".MuiFormControlLabel-label": {color: "secondary.main"}}}
               control={
                 <Radio

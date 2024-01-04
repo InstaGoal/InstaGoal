@@ -8,33 +8,83 @@ import Modal from "@/components/Modal";
 import TemplateViewDownloadBar from "@/components/TemplateViewDownloadBar";
 import TimeSelect from "@/components/TimeSelect";
 import Title from "@/components/Title";
-import { FormControlLabel, Grid, Radio, RadioGroup, Stack } from "@mui/material";
+import {
+  FormControlLabel,
+  Grid,
+  Radio,
+  RadioGroup,
+  Stack,
+} from "@mui/material";
 import { useState } from "react";
 
 export default function CardPage() {
   const [isCreateClicked, setIsCreateClicked] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [player, setPlayer] = useState("");
+  const [imageUrl, setImageUrl] = useState("/api/og");
+  const [goalMinute, setGoalMinute] = useState("");
+  const [card, setCard] = useState("")
+  const baseURL = typeof window !== 'undefined' ? window.location.origin : '';
+  const backgroundPath = `${baseURL}/cartao.svg`;
+  const encodedPlayer = encodeURIComponent(player);
+  const encodedGoalMinute = encodeURIComponent(goalMinute);
+  const encodedCard = encodeURIComponent(card)
 
-  const playerOptions = [
-    { value: "jogador", label: "Jogador" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
+  const players = [
+    { value: "jogador", label: "Jogador", isdisabled: true },
+    { value: "gustavo", label: "GUSTAVO" },
+    { value: "paulo roberto", label: "PAULO ROBERTO" },
+    { value: "victor", label: "VICTOR" },
+    { value: "renan", label: "RENAN" },
+    { value: "gabriel", label: "GABRIEL" },
+    { value: "alemao", label: "ALEMÃO" },
+    { value: "isaac", label: "ISAAC" },
+    { value: "ze guilherme", label: "ZÉ GUILHERME" },
+    { value: "matheus souza", label: "MATHEUS SOUZA" },
+    { value: "junior", label: "JUNIOR" },
+    { value: "iarlei", label: "IARLEI" },
+    { value: "phedro lucas", label: "PHEDRO LUCAS" },
+    { value: "ze elias", label: "ZÉ ELIAS" },
+    { value: "manga", label: "MANGA" },
+    { value: "clayton keven", label: "CLAYTON KEVEN" },
+    { value: "fernando", label: "FERNANDO" },
+    { value: "hugo", label: "HUGO" },
+    { value: "joao", label: "JOÃO" },
+    { value: "pablo", label: "PABLO" },
+    { value: "wenis", label: "WENIS" },
+    { value: "fischer", label: "FISCHER" },
   ];
 
   const cardOptions = [
-    { value: "cartao", label: "Tipo do cartão" },
-    { value: "amarelo", label: "Amarelo" },
-    { value: "vermelho", label: "Vermelho" },
+    { value: "cartao", label: "Tipo do cartão", isdisabled: true },
+    { value: "AMARELO", label: "Amarelo" },
+    { value: "VERMELHO", label: "Vermelho" },
   ];
 
   const handleCreateClick = () => {
     setIsCreateClicked(true);
+    setImageUrl(
+      `/api/og?title=CARTÃO%20${encodedCard}&backgroundPath=${encodeURIComponent(
+        backgroundPath
+      )}&player=${encodedPlayer}%20-%20${encodedGoalMinute}'`
+    );
   };
 
   const handleModal = () => {
     setIsModalOpen(!isModalOpen);
-    console.log(isModalOpen);
   };
+
+  const handlePlayer = (value: any) => {
+    setPlayer(value.label);
+  };
+
+  const handleGoalMinute = (event: any) => {
+    setGoalMinute(event.target.value);
+  };
+
+  const handleCard = (value:any) => {
+    setCard(value.value)
+  }
 
   return (
     <div
@@ -56,23 +106,24 @@ export default function CardPage() {
           gap: 10,
         }}
       >
-        <GridContainer
-          container
-          sx={{ justifyContent: "space-between" }}
-        >
+        <GridContainer container sx={{ justifyContent: "space-between" }}>
           <GridContainer item xs={7} sm={7.8}>
-            <GlobalSelect options={playerOptions} />
+            <GlobalSelect
+              options={players}
+              onChange={handlePlayer}
+              isOptionDisabled={(option: any) => option.isdisabled}
+            />
           </GridContainer>
           <GridContainer item xs={4}>
-            <TimeSelect />
+            <TimeSelect value={goalMinute} onChange={handleGoalMinute} />
           </GridContainer>
         </GridContainer>
 
-        <GridContainer container
-          sx={{ alignSelf: "start" }}>
-            <GridContainer item xs={7} sm={7.8}>
-                <GlobalSelect options={cardOptions} />
-            </GridContainer>
+        <GridContainer container sx={{ alignSelf: "start" }}>
+          <GridContainer item xs={7} sm={7.8}>
+            <GlobalSelect options={cardOptions} onChange={handleCard}
+              isOptionDisabled={(option: any) => option.isdisabled} />
+          </GridContainer>
         </GridContainer>
 
         <div
@@ -81,7 +132,7 @@ export default function CardPage() {
             flexDirection: "column",
             gap: 10,
             width: "100%",
-            marginTop: 25
+            marginTop: 25,
           }}
         >
           <GridContainer container={true}>
@@ -102,7 +153,7 @@ export default function CardPage() {
             )}
           </GridContainer>
 
-          <Modal open={isModalOpen} onClose={handleModal} />
+          <Modal src={imageUrl} open={isModalOpen} onClose={handleModal} />
         </div>
       </div>
     </div>
