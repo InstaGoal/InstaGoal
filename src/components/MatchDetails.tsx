@@ -16,8 +16,8 @@ export default function MatchDetails() {
       logo: "/logo-capital.svg",
     },
     {
-      name: "Cruzeiro-MG",
-      logo: "/cruzeiro-logo.svg",
+      name: "União FC",
+      logo: "/uniao-logo.svg",
     },
   ];
 
