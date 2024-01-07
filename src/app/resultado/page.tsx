@@ -73,7 +73,7 @@ export default function ResultadoPage() {
       >
         <Scoreboard
           firstSrc="/palmas-logo.svg"
-          secondSrc="/cruzeiro-logo.svg"
+          secondSrc="/uniao-logo.svg"
           valueTeamHome={inputResultHome}
           valueTeamOut={inputResultOut}
           onChangeScoreHome={handleInputResultHome}

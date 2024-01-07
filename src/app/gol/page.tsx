@@ -125,7 +125,7 @@ export default function GoalPage() {
 
           <Scoreboard
             firstSrc="/palmas-logo.svg"
-            secondSrc="/cruzeiro-logo.svg"
+            secondSrc="/uniao-logo.svg"
             valueTeamHome={inputResultHome}
             valueTeamOut={inputResultOut}
             onChangeScoreHome={handleInputResultHome}
