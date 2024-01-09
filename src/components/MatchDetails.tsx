@@ -16,8 +16,8 @@ export default function MatchDetails() {
       logo: "/logo-capital.svg",
     },
     {
-      name: "União FC",
-      logo: "/uniao-logo.svg",
+      name: "Nova Mutum",
+      logo: "/nova-mutum-logo.svg",
     },
   ];
 
@@ -65,7 +65,7 @@ export default function MatchDetails() {
           width="40%"
         >
           <Typography>Ao vivo</Typography>
-          <Typography>15:15</Typography>
+          <Typography>15:00</Typography>
         </Stack>
       </Stack>
     </Container>
